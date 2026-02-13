@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi San Valentín?</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+        transition: background 1s ease;
+        position: relative;
+    }
+
+    .star {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: #4fc3f7;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #4fc3f7;
+        animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+        from { opacity: 0.3; }
+        to { opacity: 1; }
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        z-index: 1;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 20px;
+        z-index: 1;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background-color: #2196f3;
+        color: white;
+    }
+
+    #yesBtn:hover {
+        background-color: #42a5f5;
+        transform: scale(1.1);
+    }
+
+    #noBtn {
+        background-color: white;
+        color: #2196f3;
+    }
+
+    #finalMessage {
+        display: none;
+        font-size: 28px;
+        animation: fadeIn 1s ease-in-out;
+        z-index: 1;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+</style>
+</head>
+
+<body>
+
+<h1 id="question">¿Quieres ser mi San Valentín? 💙</h1>
+
+<div class="buttons">
+    <button id="yesBtn">Sí 💖</button>
+    <button id="noBtn">No 😢</button>
+</div>
+
+<div id="finalMessage">
+    💙 Sabía que dirías que sí 💫<br>
+    Bajo este cielo mágico ✨<br>
+    Quiero que seas mi San Valentín 💖
+</div>
+
+<script>
+    const question = document.getElementById("question");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const finalMessage = document.getElementById("finalMessage");
+    const body = document.body;
+
+    const questions = [
+        "¿Estás segura? 💫",
+        "¿Segurísima? 🥺",
+        "Mira qué bonito el cielo... 🌌",
+        "Prometo abrazarte bajo las estrellas 💙",
+        "Piénsalo otra vez ✨",
+        "¿Última oportunidad? 😏"
+    ];
+
+    const backgrounds = [
+        "radial-gradient(circle at bottom, #001f3f, #000814 70%)",
+        "radial-gradient(circle at top, #0d1b2a, #1b263b 70%)",
+        "radial-gradient(circle at center, #1a237e, #000051 70%)",
+        "radial-gradient(circle at bottom, #311b92, #000000 70%)",
+        "radial-gradient(circle at top, #0f2027, #203a43, #2c5364)",
+        "radial-gradient(circle at center, #000428, #004e92)"
+    ];
+
+    let index = 0;
+
+    noBtn.addEventListener("click", function() {
+        if (index < questions.length) {
+            question.textContent = questions[index];
+            body.style.background = backgrounds[index];
+            index++;
+        } else {
+            question.textContent = "El universo quiere que digas que sí 😌✨";
+        }
+    });
+
+    yesBtn.addEventListener("click", function() {
+        question.style.display = "none";
+        document.querySelector(".buttons").style.display = "none";
+        finalMessage.style.display = "block";
+    });
+
+    // Fondo inicial
+    body.style.background = backgrounds[0];
+
+    // Generar estrellas
+    for (let i = 0; i < 120; i++) {
+        let star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.animationDuration = (Math.random() * 2 + 1) + "s";
+        document.body.appendChild(star);
+    }
+</script>
+
+</body>
+</html>
